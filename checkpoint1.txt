@@ -1,0 +1,64 @@
+What data types do each of these values represent?
+
+"A Clockwork Orange" - string
+42 - integer
+09/02/1945 date 
+98.7 - floating point
+$15.99 - currency
+
+Explain when a database would be used. Explain when a text file would be used.
+- databases should be used anytime a large quantity of data must be manipulated and saved.
+- Only if a small amount of data that must be readable by humans
+
+Describe one difference between SQL and other programming languages.
+- SQL is declaritive meaning you describe a result and get the answer back from the database engine
+- Other languages are primarily procedural, or imperative, meaning you describe the path via an algorithm to find the exact item.
+
+In your own words, explain how the pieces of a database system fit together at a high level.
+- In a SQL database, a user will write a query to return a specific item.
+- The database engine then filters out the exact rows and columns desired and returns the selected cells' values.
+
+Explain the meaning of table, row, column, and value.
+- a table is a database structure containing data organized into rows and columns labeled according to the data stored.
+- a row represents a set of values for each column label.
+- a column is a specific type of data stored in the table, such as "price"
+- a value is a piece of data stored in a cell of a table, at unique intersection of a row/column.
+
+List three data types that can be used in a table.
+- floating point
+- integer
+- string
+
+Given this payments table, provide an English description of the following queries and include their results:
+
+     SELECT date, amount // return all 'date' and 'amount' column values
+     FROM payments; // from the data table 'payments'
+
+     SELECT amount // return any value in the 'amounts' column
+     FROM payments // from the 'payments' table
+     WHERE amount > 500; // that is greater than 500
+
+     SELECT * // from all values, all columns
+     FROM payments // from 'payments' table
+     WHERE payee = 'Mega Foods'; // where 'payee' cell has a value of 'Mega Foods'
+
+Given this users table, write SQL queries using the following criteria and include the output:
+
+The email and sign-up date for the user named DeAndre Data.
+
+SELECT email, signup
+FROM users
+WHERE name = 'DeAndre Data'
+
+The user ID for the user with email 'aleesia.algorithm@uw.edu'.
+
+SELECT userid
+FROM users
+WHERE email = 'aleesia.algorithm@uw.edu'
+
+
+All the columns for the user ID equal to 4.
+
+SELECT *
+FROM users
+WHERE userid = 4
