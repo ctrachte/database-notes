@@ -1,0 +1,152 @@
+List the commands for adding, updating, and deleting data. Explain the structure for each type of command.
+
+
+add:
+INSERT INTO (table name) VALUES (values to insert)
+// first we tell the database we want to insert new values into a table name using the INSERT INTO command
+// then we tell the database the values using the VALUES command
+
+Update:
+UPDATE (table name) SET (values equal to new values) WHERE (identifying arguments)
+// first we tell the database we want to update the table using the UPDATE command
+// then we tell the database values to set using the SET command
+// then we pass the identifying arguments to the database using the WHERE commmand
+
+Delete:
+DELETE FROM (table name) WHERE (identifying arguments) AND (more identifying arguments);
+// first we tell the database we want to delete values  from a table name using the DELETE FROM command
+// then we pass the identifying arguments to the database using the WHERE commmand
+// we can also add the 'AND' command to specifiy additional arguments
+
+What are some of the data types that can be used in tables? Give a real-world example of each type.
+
+timestamp - for example, when you make a post on social media, and that post is stored in a database along with a timestamp
+boolean - in a menu table, a boolean could specifiy whether the item is dairy-free
+money - in a menu table, a money data type could store the price
+
+Decide how to create a new table to hold a list of people invited to a wedding dinner. The table needs to have first and last names, whether they sent in their RSVP, the number of guests they are bringing, and the number of meals (1 for adults and 1/2 for children).
+
+Which data type would you use to store each of the following pieces of information?
+First and last name. - text
+Whether they sent in their RSVP. - boolean
+Number of guests. - integer
+Number of meals. - numeric(1,1)
+
+Write a command that creates the table to track the wedding dinner.
+
+  CREATE TABLE guests (
+      rsvp boolean,
+      firstname text,
+      lastname text,
+      party integer,
+      plates numeric(2,1)
+  );
+
+Write a command that adds a column to track whether the guest sent a thank you card.
+
+ALTER TABLE guests ADD COLUMN thankyou boolean;
+
+
+You have decided to move the data about the meals to another table, so write a command to remove the column storing the number meals from the wedding table.
+
+ALTER TABLE products DROP COLUMN plates;
+
+The guests will need a place to sit at the reception, so write a command that adds a column for table number.
+
+ALTER TABLE guests ADD COLUMN tableno integer;
+
+The wedding is over and we do not need to keep this information, so write a command that deletes the table numbers from the database.
+
+DROP TABLE guests;
+
+Write a command to create a new table to hold the books in a library with the columns ISBN, title, author, genre, publishing date, number of copies, and available copies.
+
+  CREATE TABLE books (
+      isbn char,
+      title text,
+      author text,
+      genre text,
+      published date,
+      totalcopies integer,
+      availcopies integer
+  );
+
+Find three books and add their information to the table.
+
+INSERT INTO books (isbn, title, author, genre, published, totalcopies, availcopies) 
+    VALUES
+    (9780736692427, 'Animal Farm', 'George Orwell', 'Political Satire', 1945-08-17, 4, 3),
+    (1977639739, 'The Man Who Forgot How to Poop', 'Ghengis Swan', 'Comedy', 2017-10-02, 5, 1),
+    (138715950X, 'Francis of the Filth', 'George Miller', 'Fantasy', 2017-09-11, 4, 3)
+
+Someone has just checked out one of the books. Change the number of available copies to 1 fewer.
+
+UPDATE books SET availcopies=0 WHERE title='Francis of the Filth'
+
+Now one of the books has been added to the banned books list. Remove it from the table.
+
+DELETE FROM books WHERE title = 'Francis of the Filth';
+
+
+Write a command to make a new table to hold spacecrafts. Information should include id, name, year launched, country of origin, a brief description of the mission, orbiting body, if it is currently operating, and its approximate miles from Earth. In addition to the table creation, provide commands that perform the following operations:
+
+  CREATE TABLE spacecrafts (
+      id char,
+      name text,
+      launched year,
+      country text,
+      mission text,
+      orbiting text,
+      operational boolean,
+      miles from earth integer
+  );
+
+
+Add three non-Earth-orbiting satellites to the table.
+
+INSERT INTO books (id, name, launched, country, mission, orbiting, operational, miles from earth) 
+    VALUES
+    (12x3456789, 'Star Destroyer', 2015, 'USA', 'destroy stars', 'Mars', true, 33900000),
+    (1352r5621, 'Moon Orbiter', 2006, 'USA', 'collect information about the dark side of the moon', 'Moon', true, 238855),
+    (469782ss34, 'China One', 2016, 'China', 'spy on Nasa', 'Earth', true, 22000),
+
+Remove one of the satellites from the table since it has just crashed into the planet.
+
+DELETE FROM spacecrafts WHERE name = 'Moon Orbiter';
+
+Edit another satellite because it is no longer operating and change the value to reflect that.
+
+UPDATE spacecraft SET operational=false WHERE name='China One'
+
+
+Write a command to create a new table to hold the emails in your inbox. This table should include an id, the subject line, the sender, any additional recipients, the body of the email, the timestamp, whether or not you have read the email, and the id of the email chain it's in. Also provide commands that perform the following operations:
+
+  CREATE TABLE inbox (
+      id char,
+      subject text,
+      sender text,
+      cc text,
+      body text,
+      time stamp timestamp,
+      unread boolean,
+      chain char
+  );
+
+Add three new emails to the inbox.
+
+
+INSERT INTO inbox (id, subject, sender, cc, body, time stamp, unread, chain) 
+    VALUES
+    (55566644423, 'Thanks!', 'john.fecko@bloc.io', 'none', 'Hey Caleb, it was great having you as a student!',  '2018-04-22 19:10:25-07', false, 1234567),
+    (55566644424, 'new bloc mentor', 'taylor.reyes@bloc.io', 'success@bloc.io', 'Hey Caleb, I've opened up mentor selection again...',  '2018-04-24 17:41:25-07', false, 123456),
+    (55566644425, 'Welcome!', 'jacob.martens@bloc.io', 'none', 'Hey Caleb, I'm your new mentor, nice to meet you!',  '2018-04-24 18:50:25-07', true, 8897436),
+
+You deleted one of the emails, so write a command to remove the row from the inbox table.
+
+
+DELETE FROM inbox WHERE subject  = 'Thanks!';
+
+You started reading an email but just heard a crash in another room. Mark the email as unread before investigating the crash, so you can come back and read it later.
+
+UPDATE inbox SET unread=true WHERE subject='new bloc mentor';
+
