@@ -73,14 +73,107 @@ Display the id, age, weight, and breed of all dogs that are either over 60lbs or
 Given this cats table, what records are returned from these queries?
 
 SELECT name, adoption_date FROM cats;
+
+	name	adoption_date
+	Mushi	2016-03-22
+	Seashell	(null)
+	Azul	2016-04-17
+	Victoire	2016-09-01
+	Nala	(null)
+
 SELECT name, age FROM cats;
+
+	name	age
+	Mushi	1
+	Seashell	7
+	Azul	3
+	Victoire	7
+	Nala	1
+
 From the cats table, write queries to select the following pieces of data.
+
 Display all the information about all of the available cats.
+
+	SELECT * FROM cats;
+
 Choose one cat of each age to show to potential adopters.
+
+	SELECT name 
+	FROM cats
+	WHERE gender = 'M';
+
+
 Find all of the names of the cats, so you don’t choose duplicate names for new cats.
+
+	SELECT name 
+	FROM cats;
+
 List each comparison operator and explain when you would use it. Include a real world example for each.
-If you can’t list these from memory, do these flashcards until you can!
+
+"<"  (LESS THAN) used to check if a value is less than another value.
+- we want to select all cats younger than 3
+
+">"  (GREATER THAN) used to check if a value is greater than another value. 
+- we want to select all cats older than 3
+
+">="  (GREATER THAN OR EQUAL) used to check if a value is greater than or equal to another value. 
+- we want to select all cats that are 1 year or older
+
+"<="  (LESS THAN OR EQUAL) used to check if a value is less than or equal to another value. 
+- we want to select all cats that are 3 years or older
+
+"="  (EQUALS) used to check if a value is equal to another value. 
+- we want to find all cats taken in last thursday.
+
+"!="  (NOT EQUALS) used to check if a value not equal to another value.
+- we want to find all purebred labrador dogs not mixed with poodle.
+
+"<>" (GREATER THAN OR LESS THAN) two values are equal, if they arent, returns true.
+- we want to select all dogs that are not puppies (0 years old).
+
+"LIKE" used to check if a pattern matches in a string.
+- we want to find all dachsunds and dachsund mixes from the dogs table
+
+"BETWEEN" used to check if a value is between two values.
+- we want to find someone a medium size dog.
+
+"IS TRUE / IS FALSE" used to check boolean values.
+- we want to help someone find a cat that is fixed.
+
+"IS NULL" used to check if a value is null.
+- we want to find a dog that is not in foster care
+
+"AND" used to chain conditions together, all must be true.
+- we want to find a dog that is not in foster care and is younger than 3
+
+"OR" used to chain conditions together, only one must be true.
+- we want to find a dog that is not in foster care or is younger than 3
+
+"NOT" used to assert condition is false.
+- we want to find a dog that is not any part labrador
+
+"IS DISTINCT FROM" used instead of "<>" when one condition might be null.
+- we want to select all dogs where the adoption date is different from the intake date.
+
 From the cats table, what data is returned from these queries?
+
 SELECT name FROM cats WHERE gender = ‘F’;
+- ‘’ corrected to '' produce the output below:
+	name
+	Seashell
+	Nala
+
 SELECT name FROM cats WHERE age <> 3;
+
+	name
+	Mushi
+	Seashell
+	Victoire
+	Nala
+
 SELECT ID FROM cats WHERE name != ‘Mushi’ AND gender = ‘M’;
+- ‘’ corrected to '' produce the output below:
+
+	id
+	3
+	4
