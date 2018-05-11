@@ -40,10 +40,36 @@ VALUES
 Intake teams typically guess the breed of shelter dogs, so the breed column may have multiple words (for example, "Labrador Collie mix").
 
 Display the name, gender, and age of all dogs that are part Labrador.
+
+    SELECT name, gender, age
+    FROM dogs
+    WHERE breed LIKE '%labrador%';
+
 Display the ids of all dogs that are under 1 year old.
+
+    SELECT id
+    FROM dogs
+    WHERE age < 1;
+
+
 Display the name and age of all dogs that are female and over 35lbs.
+
+    SELECT name, age
+    FROM dogs
+    WHERE gender = 'F' AND weight > 35;
+
 Display all of the information about all dogs that are not Shepherd mixes.
+
+    SELECT *
+    FROM dogs
+    WHERE breed NOT LIKE '%shepherd%';
+
 Display the id, age, weight, and breed of all dogs that are either over 60lbs or Great Danes.
+
+    SELECT id, age, weight, breed
+    FROM dogs
+    WHERE breed LIKE '%great dane%' OR weight > 60;
+
 Given this cats table, what records are returned from these queries?
 
 SELECT name, adoption_date FROM cats;
