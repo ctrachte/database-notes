@@ -27,16 +27,84 @@ SELECT p.name, c.salary, c.vacation_days
 
 
 Why would you use a NATURAL JOIN? Give a real-world example.
+- NATURAL JOIN is a more convenient way of writing an INNER JOIN.
+- Example: We have a table of library books by ID and a table of each damaged books repair status. We want to see all books repair status by title. A NATURAL JOIN would allow us to compare all book titles by repair status.
+
+
 Using this Employee schema and data, write queries to find the following information:
+
 List all employees and all shifts.
+
+SELECT *
+ FROM scheduled_shifts AS ss
+ JOIN shifts AS s 
+  ON ss.shift_id = s.id
+ JOIN employees AS e
+  ON ss.employee_id = e.id;
+
 Using this Adoption schema and data, please write queries to retrieve the following information and include the results:
 
 Create a list of all volunteers. If the volunteer is fostering a dog, include each dog as well.
+
+SELECT v.first_name, v.last_name, d.name
+ FROM volunteers AS v
+ LEFT OUTER JOIN dogs AS d
+ ON v.foster_dog_id = d.id;
+
 The cat's name, adopter's name, and adopted date for each cat adopted within the past month to be displayed as part of the "Happy Tail" social media promotion which posts recent successful adoptions.
+
+SELECT c.name, ca.date, a.first_name, a.last_name
+ FROM cat_adoptions AS ca
+ JOIN adopters AS a
+  ON a.id = ca.adopter_id
+ JOIN cats AS c
+  ON c.id = ca.cat_id
+ WHERE ca.date > CURRENT_DATE - INTERVAL '30 DAYS';
+
 Create a list of adopters who have not yet chosen a dog to adopt.
+
+SELECT a.first_name, a.last_name
+ FROM adopters AS a
+ JOIN dog_adoptions AS da
+  ON a.id != da.adopter_id;
+
 Lists of all cats and all dogs who have not been adopted.
+
+SELECT c.name
+ FROM cats AS c
+ LEFT OUTER JOIN cat_adoptions AS ca
+  ON c.id = ca.cat_id
+ WHERE ca.cat_id IS NULL;
+ 
+SELECT d.name
+ FROM dogs AS d
+ LEFT OUTER JOIN dog_adoptions AS da
+  ON d.id = da.dog_id
+ WHERE da.dog_id IS NULL;
+
 The name of the person who adopted Rosco.
+
+SELECT a.first_name, a.last_name
+ FROM adopters AS a
+ JOIN dog_adoptions AS da
+  ON a.id = da.adopter_id;
+
 Using this Library schema and data, write queries applying the following scenarios and include the results:
 
 To determine if the library should buy more copies of a given book, please provide the names and position, in order, of all of the patrons with a hold (request for a book with all copies checked out) on "Advanced Potion-Making".
+
+SELECT h.rank, p.name
+ FROM holds AS h
+ JOIN patrons AS p
+  ON h.patron_id = p.id
+ WHERE h.isbn = '9136884926'
+ ORDER BY h.rank;
+
 List all of the library patrons. If they have one or more books checked out, list the books with the patrons.
+
+SELECT p.name, b.title
+ FROM patrons AS p
+ LEFT OUTER JOIN transactions AS t
+  ON p.id = t.patron_id AND t.checked_in_date IS NULL
+ LEFT OUTER JOIN books AS b
+  ON b.isbn = t.isbn;
